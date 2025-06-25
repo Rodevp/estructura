@@ -1,8 +1,8 @@
-import styles from "./QueueVisualizer.module.css"
+import styles from "./queue.module.css"
 import ActionButton from "../ui/ActionButton"
 
 export default function QueueVisualizer() {
-
+  // Mock data for UI display only
   const mockQueue = [1, 2, 3, 4]
   const mockSize = 4
   const mockNextValue = 5
@@ -11,16 +11,12 @@ export default function QueueVisualizer() {
     <div className={styles.container}>
       <div className={styles.visualizer}>
         <div className={styles.info}>
-          <h2 className={styles.title}>Queue</h2>
-          <p className={styles.size}>Size: {mockSize}</p>
+          <h2 className={styles.title}>Cola</h2>
+          <p className={styles.size}>Tamaño: {mockSize}</p>
           <p className={styles.description}>First In, First Out (FIFO)</p>
         </div>
 
         <div className={styles.queueContainer}>
-          <div className={styles.labels}>
-            <span className={styles.frontLabel}>Front</span>
-            <span className={styles.rearLabel}>Rear</span>
-          </div>
           <div className={styles.queue}>
             {mockQueue.map((item, index) => (
               <div
