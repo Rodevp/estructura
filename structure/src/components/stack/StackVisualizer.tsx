@@ -15,10 +15,6 @@ export default function StackVisualizer() {
     setStack([...stack].slice(0, -1))
   }
 
-  const mockStack = [1, 2, 3, 4, 5]
-  const mockSize = 4
-  const mockNextValue = 5
-
   return (
     <div className={styles.container}>
       <div className={styles.visualizer}>
