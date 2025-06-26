@@ -1,29 +1,36 @@
+import { useState } from "react"
 import styles from "./queue.module.css"
 import ActionButton from "../ui/ActionButton"
 
 export default function QueueVisualizer() {
-  // Mock data for UI display only
-  const mockQueue = [1, 2, 3, 4]
-  const mockSize = 4
-  const mockNextValue = 5
+
+  const [queue, setQueue] = useState<number[]>([])
+
+  const enqueue = () => {
+    const newItem = [...queue].length
+    setQueue([...queue, newItem])
+  }
+
+  const deQueue = () => {
+    setQueue([...queue].slice(1))
+  }
 
   return (
     <div className={styles.container}>
       <div className={styles.visualizer}>
         <div className={styles.info}>
           <h2 className={styles.title}>Cola</h2>
-          <p className={styles.size}>Tamaño: {mockSize}</p>
+          <p className={styles.size}>Tamaño: {queue.length}</p>
           <p className={styles.description}>First In, First Out (FIFO)</p>
         </div>
 
         <div className={styles.queueContainer}>
           <div className={styles.queue}>
-            {mockQueue.map((item, index) => (
+            {queue.map((item, index) => (
               <div
                 key={`${item}-${index}`}
-                className={`${styles.queueItem} ${
-                  index === 0 ? styles.frontItem : ""
-                } ${index === mockQueue.length - 1 ? styles.rearItem : ""}`}
+                className={`${styles.queueItem} ${index === 0 ? styles.frontItem : ""
+                  } ${index === queue.length - 1 ? styles.rearItem : ""}`}
                 style={{
                   animationDelay: `${index * 0.1}s`,
                 }}
@@ -35,11 +42,11 @@ export default function QueueVisualizer() {
         </div>
 
         <div className={styles.controls}>
-          <ActionButton onClick={() => {}} variant="primary">
-            Enqueue ({mockNextValue})
+          <ActionButton onClick={() => { enqueue() }} variant="primary">
+            Enqueue ({queue.length + 1})
           </ActionButton>
-          <ActionButton onClick={() => {}}>Dequeue</ActionButton>
-          <ActionButton onClick={() => {}} variant="danger">
+          <ActionButton onClick={() => { deQueue() }}>Dequeue</ActionButton>
+          <ActionButton onClick={() => { setQueue([]) }} variant="danger">
             Clear
           </ActionButton>
         </div>
