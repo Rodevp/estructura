@@ -2,9 +2,11 @@ import { useState } from "react"
 import styles from "./app.module.css"
 import QueueVisualizer from "./components/qeue/QueueVisualizer"
 import StackVisualizer from "./components/stack/StackVisualizer"
+import LinkedListVisualizer from "./components/linkedList/LinkedListVisualizer"
 
+type OPTION_VALUES = "queue" | "stack" | "linkedlist"
 export default function App() {
-  const [currentView, setCurrentView] = useState<"queue" | "stack">("stack")
+  const [currentView, setCurrentView] = useState<OPTION_VALUES>("stack")
 
   return (
     <div className={styles.container}>
@@ -23,10 +25,18 @@ export default function App() {
           >
             Queue
           </button>
+          <button
+            className={`${styles.switchButton} ${currentView === "linkedlist" ? styles.active : ""}`}
+            onClick={() => setCurrentView("linkedlist")}
+          >
+            Linked List
+          </button>
         </div>
       </header>
       <main className={styles.main}>
-        {currentView === "stack" ? <StackVisualizer /> : <QueueVisualizer />}
+        {currentView === "stack" && <StackVisualizer /> }
+        {currentView === "queue" && <QueueVisualizer />}
+        {currentView === "linkedlist" && <LinkedListVisualizer />}
       </main>
     </div>
   )
